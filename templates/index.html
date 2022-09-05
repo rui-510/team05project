@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            padding-bottom: 3rem;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                Helvetica, Arial, sans-serif;
+        }
+
+        #form {
+            background: #181818dc;
+            padding: 0.25rem;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            height: 3rem;
+            box-sizing: border-box;
+            backdrop-filter: blur(10px);
+        }
+
+        #input {
+            border: none;
+            padding: 0 1rem;
+            flex-grow: 1;
+            margin: 0.25rem;
+        }
+
+        #input:focus {
+            outline: none;
+        }
+
+        #form>button {
+            background: #4e8357;
+            border: none;
+            padding: 0 1rem;
+            margin: 0.25rem;
+            border-radius: 1px;
+            outline: none;
+            color: #fff;
+        }
+
+        #messages {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        #messages>li {
+            padding: 0.5rem 1rem;
+        }
+
+        #messages>li:nth-child(odd) {
+            background: #efefef;
+        }
+        .mes {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+
+    <p>グループの人数 : <span id="user_count"></span>人</p>
+    <ul id="messages"></ul>
+    <form id="form" action="">
+        <input id="input" autocomplete="off" /><button>送信する</button>
+    </form>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"
+        integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA=="
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" charset="utf-8">
+        const socket = io();
+
+        // 接続者数の更新
+        socket.on('count_update', function (msg) {
+            $('#user_count').html(msg.user_count);
+        });
+
+        // メッセージが入力されると呼び出される
+        $("#form").on("submit", function (e) {
+            let val = $("#input").val();
+            e.preventDefault();
+            //メッセージがある時のみサーバー側に送信する
+            if (val) {
+                socket.emit("chat_message", { message: val });
+                $("#input").val("");
+            }
+        })
+
+        // メッセージの追加
+        socket.on('chat_message', function (msg) {
+            $("<li>", {
+                text: msg.message
+            }).appendTo('#messages');
+        });
+
+        //接続した人に現在の画面を共有
+        socket.on('restore_message', function (msg) {
+            for (let i = 0; i < msg.chat.length; i++) {
+                $("<li>", {
+                    text: msg.chat[i]
+                }).appendTo('#messages');
+            }
+        });
+    </script>
+</body>
+
+</html>
