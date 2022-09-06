@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request
 from flask_socketio import SocketIO, send, emit
 
+import random
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
 
@@ -12,7 +14,6 @@ user_count = 0
 # メッセージ
 chat = []
 
-
 # チャット画面表示
 @app.route('/')
 def index():
@@ -22,11 +23,18 @@ def index():
 @socketio.on('connect')
 def connect(auth):
     global user_count, chat
+
+    # ユーザー名をランダムに決定(本来はデータベースから取得)
+    user_name = "ゲスト" + str(random.randint(0, 100))
+
+    # ユーザーの数を１増やす
     user_count += 1
-    # 接続者数の更新（全員向け）
-    emit('count_update', {'user_count': user_count}, broadcast=True)
-    # # テキストエリアの更新(接続した人のみ)
-    emit('restore_message', {'chat': chat})
+
+    # 接続者数の更新（全員向けに送信）
+    emit('count_update', {'user_count': user_count, 'name': user_name, 'alert': True}, broadcast=True)
+
+    # テキストエリアの更新と名前の表示(接続した人のみに送信)
+    emit('restore_message', {'chat': chat, 'name': user_name})
 
 
 # ユーザーの接続が切断すると実行
@@ -35,7 +43,8 @@ def disconnect():
     global user_count
     user_count -= 1
     # 接続者数の更新（全員向け）
-    emit('count_update', {'user_count': user_count}, broadcast=True)
+    # 退室通知はしないようにする(alert = false)
+    emit('count_update', {'user_count': user_count, 'alert': False}, broadcast=True)
 
 
 # メッセージが送信されると実行
@@ -43,9 +52,11 @@ def disconnect():
 def chat_message(json):
     global chat
     message = json["message"]
-    chat.append(message)
+    user = json["user"]
+    user_message = user + " : " + message
+    chat.append(user_message)
     # メッセージを全員に送信
-    emit('chat_message', {'message': message}, broadcast=True)
+    emit('chat_message', {'message': user_message}, broadcast=True)
 
 
 if __name__ == '__main__':
