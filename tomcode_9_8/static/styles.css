@@ -1,0 +1,18 @@
+html{
+    /* 思ったように中央化できてない */
+    text-align: center;
+    /* 背景色も変わってない・・・ */
+    background-color: #C0C0C0;
+}
+
+.header {
+    background-color: #00f;
+    color: #fff;
+    font-size: xx-large;
+    margin-bottom: 3rem;
+    padding: 3rem 2rem;
+}
+
+.page_color_botton{
+    background-color: #00FF00;
+}
