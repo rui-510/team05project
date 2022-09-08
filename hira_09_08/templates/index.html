@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    かぶり防止チャット
+{% endblock %}
+
+
+{% block head %}
+    <link href="../static/style.css" rel="stylesheet">
+{% endblock %}
+
+{% block main %}
+
+    <div class="alert alert-primary" role="alert">
+        <p id="notice"><span id="enter"></span> が入室しました</p>
+    </div>
+
+    <h1>グループの人数 : <span id="user_count"></span>人</h1>
+    <ul id="messages"></ul>
+    <div class="input-group mb-3">
+        <div id="action">
+            <span class="input-group-text" id="basic-addon3"></span>
+            <button type="button" class="btn btn-primary ms-3">質問があります</button>
+            <button type="button" class="btn btn-warning ms-3">次は自分が話したいです</button>
+            <button type="button" class="btn btn-info ms-3">その意見には賛成です</button>
+            <button type="button" class="btn btn-danger ms-3">その意見には反対です</button>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"
+        integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA=="
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="../static/script.js" charset="utf-8"></script>
+{% endblock %}
