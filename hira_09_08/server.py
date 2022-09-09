@@ -45,7 +45,11 @@ def make():
 @app.route('/join', methods=["GET", "POST"])
 @login_required
 def join():
-    return render_template('join.html')
+    if request.method == "POST":
+        return render_template("chatroom.html")
+
+    else:
+        return render_template('join.html')
 
 # チャット画面表示
 @app.route('/chatroom', methods=["GET", "POST"])
