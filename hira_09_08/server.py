@@ -33,7 +33,7 @@ chat = []
 @app.route('/')
 @login_required
 def index():
-    return render_template('index.html')
+    return render_template('chatroom.html')
 
 
 """"""""""""""""""""""ログイン関連処理"""""""""""""""""""""""
