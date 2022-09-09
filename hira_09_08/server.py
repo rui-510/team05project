@@ -132,7 +132,7 @@ def logout():
 
     # Redirect user to login form
     return redirect("/")
-    
+
 
 """""""""""""""""""""ユーザー接続処理"""""""""""""""""""""
 
@@ -141,8 +141,8 @@ def logout():
 def connect(auth):
     global user_count, chat
 
-    # ユーザー名をランダムに決定(本来はデータベースから取得)
-    user_name = "ゲスト" + str(random.randint(0, 100))
+    # ユーザー名をデータベースから取得
+    user_name = db.execute("SELECT * FROM users WHERE id = ?", session["user_id"])[0]["username"]
 
     # ユーザーの数を１増やす
     user_count += 1
