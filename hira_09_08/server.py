@@ -29,10 +29,16 @@ user_count = 0
 # メッセージ
 chat = []
 
-# チャット画面表示
+# ホーム画面表示
 @app.route('/')
 @login_required
 def index():
+    return render_template('index.html')
+
+# チャット画面表示
+@app.route('/chatroom', methods=["GET", "POST"])
+@login_required
+def chatroom():
     return render_template('chatroom.html')
 
 
