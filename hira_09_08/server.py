@@ -35,6 +35,18 @@ chat = []
 def index():
     return render_template('index.html')
 
+# ルーム作成画面
+@app.route('/make', methods=["GET", "POST"])
+@login_required
+def make():
+    return render_template('make.html')
+
+# ルーム参加処理
+@app.route('/join', methods=["GET", "POST"])
+@login_required
+def join():
+    return render_template('join.html')
+
 # チャット画面表示
 @app.route('/chatroom', methods=["GET", "POST"])
 @login_required
@@ -44,6 +56,7 @@ def chatroom():
 
 """"""""""""""""""""""ログイン関連処理"""""""""""""""""""""""
 
+# 新規登録の処理
 @app.route("/register", methods=["GET", "POST"])
 def register():
     """Register user"""
@@ -94,6 +107,7 @@ def register():
 
         return redirect("/")
 
+# ログイン処理
 @app.route("/login", methods=["GET", "POST"])
 def login():
     """Log user in"""
@@ -129,6 +143,7 @@ def login():
     else:
         return render_template("login.html")
 
+# ログアウト処理
 @app.route("/logout")
 def logout():
     """Log user out"""
