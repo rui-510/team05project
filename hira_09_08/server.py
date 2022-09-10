@@ -49,8 +49,7 @@ def make():
 
         # データベースにルーム情報を挿入
 
-        
-
+        # チャットルームの画面に遷移する
         return render_template('chatroom.html')
     else:
         return render_template('make.html')
