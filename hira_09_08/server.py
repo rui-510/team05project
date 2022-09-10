@@ -52,8 +52,14 @@ def make():
         # チャットルームの画面に遷移する
         return render_template('chatroom.html')
     else:
-        # ランダムに
+        # ランダムに6桁の数字を生成
+
+        # データベースに同じ数字の部屋が存在しないか確認
+            # 存在する場合はもう一度生成しなおす
+
+        # チャット生成画面を表示
         return render_template('make.html')
+
 
 # ルーム参加処理
 @app.route('/join', methods=["GET", "POST"])
