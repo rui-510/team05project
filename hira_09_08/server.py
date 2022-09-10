@@ -39,7 +39,21 @@ def index():
 @app.route('/make', methods=["GET", "POST"])
 @login_required
 def make():
-    return render_template('make.html')
+    if request.method == "POST":
+
+        # ルームidの取得
+
+        # パスワードの取得
+
+        # パスワードが正しく入力できているかの判定
+
+        # データベースにルーム情報を挿入
+
+        
+
+        return render_template('chatroom.html')
+    else:
+        return render_template('make.html')
 
 # ルーム参加処理
 @app.route('/join', methods=["GET", "POST"])
