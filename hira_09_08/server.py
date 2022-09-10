@@ -52,6 +52,7 @@ def make():
         # チャットルームの画面に遷移する
         return render_template('chatroom.html')
     else:
+        # ランダムに
         return render_template('make.html')
 
 # ルーム参加処理
