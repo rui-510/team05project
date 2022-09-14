@@ -25,7 +25,7 @@ https://qiita.com/riversun/items/3ff4f5ecf5c21b0548a4
 
 ## 変えたところ
 「script.js」の「メッセージの追加」(47行)
-          「appendTo('#messages')」→「prependTo('#messages')」　
+          「appendTo('#messages')」→「prependTo('#messages')」<br>
   (＊変えたのはこれだけ。メッセージは下に行くほど最新のものというイメージが「LINE」や「Discord」等で作られてしまっているので、できれば改善したい気もする。)
   
   ## 参考URL
