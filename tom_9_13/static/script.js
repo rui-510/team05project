@@ -43,7 +43,8 @@ $(function() {
     socket.on('chat_message', function (msg) {
         $("<li>", {
             text: msg.text
-        }).appendTo('#messages');
+        // メッセージを先頭に置くようにして、チャット数が長くなった時にスクロールせずに済むようにした。          
+        }).prependTo('#messages');
     });
 
     //接続した人に現在の画面を共有
