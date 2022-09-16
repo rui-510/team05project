@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    ホーム画面
+{% endblock %}
+
+{% block main %}
+
+    <h2>チャットルームを作成</h2>
+    <br><br>
+    <form action="/make" method="post">
+        <div>
+            <h2>ルームid : 100000</h2>
+        </div>
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="password" name="password" placeholder="ルームのパスワード(10文字以下)" type="text">
+        </div>
+        <button class="btn btn-primary" type="submit">ルームを作成</button>
+    </form>
+
+{% endblock %}
