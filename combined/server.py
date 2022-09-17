@@ -6,6 +6,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 from helpers import login_required
 
+import datetime
 import random
 import time
 
@@ -219,15 +220,14 @@ def join():
             return render_template("join.html")
 
         # 入力情報が正しいかの確認
-        room_pass = room[0]["password"]
-        if room_pass == password:
+        room_pass = str(room[0]["password"])
+
+        if room_pass != password:
             flash("入力されたパスワードが間違っています")
             return render_template("join.html")
 
         # 匿名機能の判定
         is_anonymous = int(request.form.get("anonymous"))
-
-        print(is_anonymous)
 
         db.execute("UPDATE users SET is_anonymous = ? WHERE id = ?", is_anonymous, session["user_id"])
 
@@ -326,11 +326,12 @@ def disconnect():
 @socketio.on('chat_message')
 def chat_message(json):
     global room_id
-    # global chat
     text = json["text"]
     user = json["user"]
     id = json["id"]
     room_id = int(id)
+
+    date = datetime.datetime.now()
     user_text = user + " : " + text
     # chat.append(user_text)
     # メッセージを同じルーム内の全員に送信

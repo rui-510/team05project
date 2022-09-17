@@ -47,7 +47,7 @@
 }
 
 /* === 丸部分のSTYLE（標準） =============================== */
-.switchArea #swImg {
+.switchArea .swImg {
     position       : absolute;            /* 親要素からの相対位置*/
     width          : 20px;                /* 丸の横幅           */
     height         : 20px;                /* 丸の高さ           */
@@ -59,7 +59,7 @@
 }
 
 /* === 丸部分のSTYLE（ONのとき） =========================== */
-.switchArea input[type="checkbox"]:checked ~ #swImg {
+.switchArea input[type="checkbox"]:checked ~ .swImg {
     transform      : translateX(51px);    /* 丸も右へ移動       */
     background     : #fff;             /* カーソルタブの背景 */
 }
@@ -69,11 +69,11 @@ p {
     color:  rgb(0 26 242 / 60%);
 }
 
-#hidden {
+.hidden {
     float: left;
 }
 
-#over {
+.over {
     margin: 20px auto;
     padding: 0 0 0 6rem;
     width: 370px;
