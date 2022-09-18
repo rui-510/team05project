@@ -25,11 +25,23 @@ $(function() {
     });
 
     // メッセージが入力されると呼び出される
-    $(".message").on("click", function (e) {
+    // $(".message").on("click", function (e) {
+    //     id = $("#id").html();
+    //     let text = $(this).text();
+    //     let user_name = $("#basic-addon3").html();
+    //     socket.emit("chat_message", { text: text , user: user_name , id: id });
+    // })
+
+     // メッセージが入力されると呼び出される
+    $("#form").on("submit", function (e) {
+        e.preventDefault();
         id = $("#id").html();
-        let text = $(this).text();
+        let text = $("#basic-url").val();
         let user_name = $("#basic-addon3").html();
-        socket.emit("chat_message", { text: text , user: user_name , id: id });
+        if (text) {
+            socket.emit("chat_message", { text: text , user: user_name , id: id });
+            text = "";
+        }
     })
 
     // ショートカットキーの設定
