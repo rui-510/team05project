@@ -1,33 +1,27 @@
 # README
 ## 更新ベース
-「hira_09_08」(最終更新：2022/9/11)
+「conbined」(最終更新：2022/9/17)
 
 ## 更新点(更新日：2022/9/13)
-ショートカットキーを離した(押し続けるた時に連投にならないようにした)際、特定のボタンが押されるようにした。
+①パスワード忘れ防止機能の実装(単にパスワードも表示するようにしただけ。プライバシーの考慮はしてないので、改善の余地あり。)
+②チャットごとのタイムスタンプ機能の実装
 
 ## 変えたところ
-### 「chatroom.html」(24～27行)
-・各ボタンの「id」を追加
-### 「script.js」(18～31行)
-・ショートカットキーを押した際、特定のボタンが押されるようなコードを挿入。
+①(＊パスワードIDと同じような仕様にすればよいという考えで更新しましたが、不要な更新点もあるかもしれません。)
+### 「server.py」(34行)
+「password = 0」
+### 「server.py」の@app.route(146行～)
+「global room_id, password」(150行)
+「return render_template('chatroom.html', room_id=room_id, password=password)」(186行)
+### 「chatroom.html」(23～25行)
+(＊ルームIDと同様に表示。デザインは他との兼ね合いがあるため考慮していない。)<br><br>
+
+②
+###「server.py」(10行目)
+「import datetime, pytz」
+### 「server.py」の@socketio.on('chat_message')(328行～)<br>
 
 ## 参考URL
-・【JavaScript】キー入力でキャラを動かしてみよう！　小学生からのプログラミング入門<br>
-https://original-game.com/introduction-to-javascript-move-a-character-by-input/
-
-・JavaScriptのキーボードイベント、キー判定にどれつかう？<br>
-https://qiita.com/riversun/items/3ff4f5ecf5c21b0548a4
-
-
-
-## 再更新点(更新日：2022/9/14)
-チャットメッセージを先頭に置くようにして、チャット数が長くなった時にスクロールせずに済むようにした。
-
-## 変えたところ
-「script.js」の「メッセージの追加」(47行)<br>
-          内容：「appendTo('#messages')」→「prependTo('#messages')」<br>
-  (＊変えたのはこれだけ。<br>メッセージは下に行くほど最新のものというイメージが「LINE」や「Discord」等で作られてしまっているので、できれば改善したい気もする。)
-  
-  ## 参考URL
-  ・jQuery 要素を追加/子要素の先頭最後(append)<br>
-  https://itsakura.com/jquery-prepend
+①(なし)
+②【Python】現在時刻を表示するには？ datetime モジュール
+https://aiacademy.jp/media/?p=1870
