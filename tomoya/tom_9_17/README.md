@@ -22,6 +22,6 @@
 ### 「server.py」の@socketio.on('chat_message')(328行～)<br>
 
 ## 参考URL
-①(なし)
+①(なし)<br>
 ②【Python】現在時刻を表示するには？ datetime モジュール
 https://aiacademy.jp/media/?p=1870
