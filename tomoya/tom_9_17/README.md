@@ -23,5 +23,5 @@
 
 ## 参考URL
 ①(なし)<br>
-②【Python】現在時刻を表示するには？ datetime モジュール
+②【Python】現在時刻を表示するには？ datetime モジュール<br>
 https://aiacademy.jp/media/?p=1870
