@@ -16,7 +16,7 @@
 ### 「chatroom.html」(23～25行)
 (＊ルームIDと同様に表示。デザインは他との兼ね合いがあるため考慮していない。)<br><br>
 
-②
+②<br>
 ###「server.py」(10行目)
 「import datetime, pytz」
 ### 「server.py」の@socketio.on('chat_message')(328行～)<br>
