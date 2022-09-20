@@ -20,13 +20,15 @@
     <nav class="bg-light border navbar navbar-expand-md navbar-light">
         <div id="haikei" class="container-fluid">
             <h3>グループの人数 : <span id="user_count"></span>人</h3>
-            <div class="room">
-                <p>ルームid</p>
-                <p id="id">{{ room_id }}</p>
-            </div>
-            <div class="room">
-                <p>ルームid</p>
-                <p id="password">{{ password }}</p>
+            <div id="">
+                <div class="room">
+                    <p>ルームid</p>
+                    <p id="id">{{ room_id }}</p>
+                </div>
+                <div class="room">
+                    <p>パスワード</p>
+                    <p id="password">{{ password }}</p>
+                </div>
             </div>
             <ul id="members" class="list-group accordion-item">
             </ul>
