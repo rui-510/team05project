@@ -126,12 +126,13 @@ form {
 }
 
 #room_info {
-    margin: 0 auto 0 40px;
+    margin: 0 auto 0 0;
+    display: flex;
 }
 
 .room {
     padding: 0;
-    margin: 0 auto 0 40px;
+    margin-left: 40px;
     font-size: 0;
 }
 
