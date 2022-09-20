@@ -7,7 +7,7 @@ $(function() {
     const audio = $('#btn_audio')[0];
 
     // 接続者数の更新
-    socket.on('count_update', function () {
+    socket.on('count_update', function (msg) {
         let user = msg.name;
         // 人数の更新
         $('#user_count').html(msg.user_count);
