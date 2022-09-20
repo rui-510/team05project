@@ -24,6 +24,12 @@
                 <p>ルームid</p>
                 <p id="id">{{ room_id }}</p>
             </div>
+            <div class="room">
+                <p>ルームid</p>
+                <p id="password">{{ password }}</p>
+            </div>
+            <ul id="members" class="list-group accordion-item">
+            </ul>
         </div>
     </nav>
 
@@ -31,20 +37,33 @@
         <p id="notice"><span id="enter"></span> が入室しました</p>
     </div>
 
+    <div class="mute_btn" onClick="mute()">muteの切り替え</div>
+
     <ul id="messages"></ul>
     <div class="input-group mb-3">
-        <div id="action">
-            <span class="input-group-text" id="basic-addon3"></span>
+        <div id="button">
             <button type="button" class="btn btn-primary message ms-3">質問があります</button>
             <button type="button" class="btn btn-warning message ms-3">次は自分が話したいです</button>
             <button type="button" class="btn btn-info message ms-3">その意見には賛成です</button>
             <button type="button" class="btn btn-success message ms-3">その意見には反対です</button>
+        </div>
+        <div id="chat">
+            <form id="form" action="">
+                <span class="input-group-text" id="basic-addon3"></span>
+                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" autocomplete="off" autofocus>
+                <button>送信する</button>
+            </form>
             <form action="/chatroom" method="post">
                 <input type="hidden" name="id" id="roomid">
                 <button id="close" type="submit" class="btn btn-danger ms-3">終了</button>
             </form>
         </div>
     </div>
+
+    <audio id="btn_audio">
+        <source src="../static/audio/oto.mp3" type="audio/mp3">
+    </audio>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"
         integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA=="
         crossorigin="anonymous"></script>

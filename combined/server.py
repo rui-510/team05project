@@ -6,7 +6,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 from helpers import login_required
 
-import datetime
+import datetime, pytz
 import random
 import time
 
@@ -74,7 +74,6 @@ def register():
         hash = generate_password_hash(password)
 
         try:
-            # 「""」も必要！
             new_user = db.execute("INSERT INTO users (username, hash) VALUES (?, ?)", username, hash)
         except:
             flash("すでに登録されています")
@@ -181,7 +180,7 @@ def make():
         db.execute("UPDATE users SET is_anonymous = ? WHERE id = ?", is_anonymous, session["user_id"])
 
         # チャットルームの画面に遷移する
-        return render_template('chatroom.html', room_id=room_id)
+        return render_template('chatroom.html', room_id=room_id, password=password)
 
 
 # ルーム参加処理
@@ -283,9 +282,18 @@ def connect(auth):
     # ルーム参加
     join_room(room_id)
 
+    # ルームのメンバー情報を追加
+    db.execute("INSERT INTO members (room_id, user_id, user_name) VALUES (?, ?, ?)", room_id, session["user_id"], user_name)
+
+    # ルームのメンバー情報を取得
+    members = db.execute("SELECT user_name FROM members WHERE room_id = ?", room_id)
+
+    # リスト変換
+    members = [str(i["user_name"]) for i in members]
+
     # 接続者数の更新（全員向けに送信）
     # 入室通知をする(alert = true)
-    emit('count_update', {'user_count': user_count, 'name': user_name, 'alert': True},  room=room_id)
+    emit('count_update', {'user_count': user_count, 'name': user_name, 'members': members, 'alert': True},  room=room_id)
 
     # 名前の表示
     emit('display_name', {'name': user_name})
@@ -313,13 +321,22 @@ def disconnect():
     # ルーム退室
     leave_room(room_id)
 
+    # ルームのメンバー情報を削除
+    db.execute("DELETE FROM members WHERE room_id = ? AND user_id = ?", room_id, session["user_id"])
+
+    # ルームのメンバー情報を取得
+    members = db.execute("SELECT user_name FROM members WHERE room_id = ?", room_id)
+
+    # リスト変換
+    members = [str(i["user_name"]) for i in members]
+
     # 部屋の人数が0人なったら削除
     if user_count == 0:
         db.execute("DELETE FROM chat_room WHERE id = ?", room_id)
 
     # 接続者数の更新（全員向け）
     # 退室通知はしない(alert = false)
-    emit('count_update', {'user_count': user_count, 'alert': False}, room=room_id)
+    emit('count_update', {'user_count': user_count, 'members': members, 'alert': False}, room=room_id)
 
 
 # ボタンが押されるとメッセージを送信
@@ -331,9 +348,16 @@ def chat_message(json):
     id = json["id"]
     room_id = int(id)
 
-    date = datetime.datetime.now()
-    user_text = user + " : " + text
+    # 日本時間での現在時刻を取得
+    date = datetime.datetime.now(pytz.timezone('Asia/Tokyo'))
+
+    # 現在時刻のデータ形式を「datetime型」から「文字型」に変更
+    date_str = "   (" + date.strftime('%H:%M') + ")   "
+
+    user_text = user + " : " + text + date_str
+
     # chat.append(user_text)
+    
     # メッセージを同じルーム内の全員に送信
     emit('chat_message', {'text': user_text}, room=room_id)
 
