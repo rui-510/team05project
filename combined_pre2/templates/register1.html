@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    ホーム画面
+{% endblock %}
+
+{% block main %}
+
+    <form>
+        <h5>LINEアカウントでログイン&公式追加</h5>
+        <body>
+            <a href="/line_redirect"><img src="../static/btn_login_base.png"/></a>
+        </body>
+    </form>
+
+    <br><br><br><br>
+
+    <h2></h2>
+    <br><br>
+    <div class="d-grid gap-2 col-6 mx-auto">
+        <a class="btn btn-primary" href="/index" role="button">スキップ</a>
+    </div>
+
+
+
+{% endblock %}
