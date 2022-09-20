@@ -150,7 +150,7 @@ form {
     padding: 0 0 0 30px;
 }
 
-#id #password{
+#id, #password{
     border-radius: 0 10px 10px 0;
     padding: 0 0 0 34px;
 }
