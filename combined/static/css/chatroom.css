@@ -152,11 +152,7 @@ form {
 
 #id, #password{
     border-radius: 0 10px 10px 0;
-    text-align: ceter;
-}
-
-#room_info {
-    width: 80%;
+    text-align: center;
 }
 
 /* 文字装飾 */
