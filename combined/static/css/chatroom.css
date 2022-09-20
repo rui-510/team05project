@@ -152,6 +152,13 @@ form {
 
 #id, #password{
     border-radius: 0 10px 10px 0;
+}
+
+#id {
+    padding: 0 0 0 34px;
+}
+
+#password {
     padding: 0 0 0 34px;
 }
 
