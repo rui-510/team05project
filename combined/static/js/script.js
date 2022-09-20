@@ -99,13 +99,13 @@ $(function() {
     });
 
     // 音のオンオフの切り替え
-    function mute() {
+    $("#mute").on("click", () => {
         if (audio.muted) {
             audio.muted = false;
         } else {
             audio.muted = true;
         }
-    }
+    })
 
     //接続した人に現在の画面を共有
     // socket.on('restore_message', function (msg) {
