@@ -125,16 +125,8 @@ form {
     right:0px;
 }
 
-.room {
-    padding: 0;
-    margin: 0 auto 0 40px;
-    font-size: 0;
-}
-
 #room_info {
-    padding: 0;
     margin: 0 auto 0 40px;
-    font-size: 0;
 }
 
 .room p {
