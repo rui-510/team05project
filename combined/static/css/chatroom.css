@@ -131,6 +131,12 @@ form {
     font-size: 0;
 }
 
+#room_info {
+    padding: 0;
+    margin: 0 auto 0 40px;
+    font-size: 0;
+}
+
 .room p {
     font-weight: bold;
     color: #6e6e6e;/*文字色*/
