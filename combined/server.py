@@ -231,7 +231,7 @@ def join():
         db.execute("UPDATE users SET is_anonymous = ? WHERE id = ?", is_anonymous, session["user_id"])
 
         # 画面遷移
-        return render_template("chatroom.html", room_id=room_id)
+        return render_template("chatroom.html", room_id=room_id, password=password)
 
     else:
         return render_template('join.html')
