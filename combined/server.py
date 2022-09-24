@@ -1,10 +1,10 @@
-from flask import Flask, redirect, flash ,render_template, request, session
+from flask import Flask, redirect, flash, render_template, request, session
 from flask_session import Session
 from flask_socketio import SocketIO, send, emit, join_room, leave_room
 from cs50 import SQL
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from helpers import login_required
+from helpers import login_required, roomin_checked
 
 import datetime, pytz
 import random
@@ -143,6 +143,7 @@ def index():
 # ルーム作成画面
 @app.route('/make', methods=["GET", "POST"])
 @login_required
+@roomin_checked
 def make():
     global room_id
 
@@ -186,6 +187,7 @@ def make():
 # ルーム参加処理
 @app.route('/join', methods=["GET", "POST"])
 @login_required
+@roomin_checked
 def join():
     global room_id
 
@@ -231,7 +233,7 @@ def join():
         db.execute("UPDATE users SET is_anonymous = ? WHERE id = ?", is_anonymous, session["user_id"])
 
         # 画面遷移
-        return render_template("chatroom.html", room_id=room_id)
+        return render_template("chatroom.html", room_id=room_id, password=password)
 
     else:
         return render_template('join.html')
@@ -346,21 +348,23 @@ def chat_message(json):
     text = json["text"]
     user = json["user"]
     id = json["id"]
+    msg_type = json["type"]
     room_id = int(id)
 
     # 日本時間での現在時刻を取得
     date = datetime.datetime.now(pytz.timezone('Asia/Tokyo'))
 
     # 現在時刻のデータ形式を「datetime型」から「文字型」に変更
-    date_str = "   (" + date.strftime('%H:%M') + ")   "
-
-    user_text = user + " : " + text + date_str
+    date_str = "-" + date.strftime('%H:%M') + "-"
 
     # chat.append(user_text)
-    
-    # メッセージを同じルーム内の全員に送信
-    emit('chat_message', {'text': user_text}, room=room_id)
 
+    # メッセージの種類を判別
+    if msg_type == "button":
+        emit('chat_message', {'text': text , 'user': user , 'date': date_str , 'type': True}, room=room_id)
+
+    elif msg_type == "message":
+        emit('chat_message', {'text': text , 'user': user , 'date': date_str , 'type': False}, room=room_id)
 
 if __name__ == '__main__':
     # 本番環境ではeventletやgeventを使うらしいが簡単のためデフォルトの開発用サーバーを使う

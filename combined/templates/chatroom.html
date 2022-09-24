@@ -34,11 +34,15 @@
         </div>
     </nav>
 
-    <div class="alert alert-primary" role="alert">
+    <div class="alert alert-info" role="alert">
         <p id="notice"><span id="enter"></span> が入室しました</p>
     </div>
 
+    <!-- メッセージ表示 -->
     <ul id="messages"></ul>
+
+    <div id="elem"></div>
+
     <div class="input-group mb-3">
         <div id="button">
             <button type="button" class="btn btn-primary message ms-3">質問があります</button>
@@ -60,13 +64,16 @@
         </div>
     </div>
 
+    <!-- 効果音の設定 -->
     <audio id="btn_audio">
         <source src="../static/audio/oto.mp3" type="audio/mp3">
     </audio>
 
+    <!-- socket.ioの設定 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"
         integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA=="
         crossorigin="anonymous"></script>
+    <!-- jqueryの設定 -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 

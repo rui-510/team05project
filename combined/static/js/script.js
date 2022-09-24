@@ -1,4 +1,5 @@
 $(function() {
+
     const socket = io();
 
     let id = $("#id").html();
@@ -28,12 +29,11 @@ $(function() {
         }
 
         // 最初の人を表示
-        $('#members').append('<li class="accordion-header list-group-item list-group-item-info" id="flush-headingOne"></li>')
-        // $('#members').append('<button class="accordion-button collapsed list-group-item list-group-item-info" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne"><button>')
+        $('#members').append('<li class="accordion-header list-group-item list-group-item-light" id="flush-headingOne"></li>')
         $("<button>", {
             type: "button",
             text: msg.members[0],
-            class: "accordion-button collapsed list-group-item list-group-item-info",
+            class: "accordion-button collapsed list-group-item list-group-item-light",
             "data-bs-toggle": "collapse",
             "data-bs-target": "#flush-collapseOne",
             "aria-expanded": "false",
@@ -45,7 +45,7 @@ $(function() {
         for (let i = 1; i < msg.members.length; i++) {
             $("<li>", {
                 text: msg.members[i],
-                class: "accordion-body list-group-item list-group-item-info"
+                class: "accordion-body list-group-item list-group-item-light"
             }).appendTo('#flush-collapseOne');
         }
     });
@@ -61,7 +61,7 @@ $(function() {
         id = $("#id").html();
         let text = $(this).text();
         let user_name = $("#basic-addon3").html();
-        socket.emit("chat_message", { text: text , user: user_name , id: id });
+        socket.emit("chat_message", { text: text , user: user_name , id: id , type: "button"});
     })
 
      // メッセージが入力されると呼び出される
@@ -71,7 +71,7 @@ $(function() {
         let text = $("#basic-url").val();
         let user_name = $("#basic-addon3").html();
         if (text) {
-            socket.emit("chat_message", { text: text , user: user_name , id: id });
+            socket.emit("chat_message", { text: text , user: user_name , id: id , type: "message"});
             $("#basic-url").val("")
         }
     })
@@ -88,9 +88,34 @@ $(function() {
 
     // メッセージの追加
     socket.on('chat_message', function (msg) {
-        $("<li>", {
-            text: msg.text
-        }).prependTo('#messages');
+        // ボタンかチャットの判別
+        if (msg.type) {
+            $("<li>", { class: "button-msg box" }).prependTo('#messages');
+        }
+        else {
+            $("<li>", { class: "chat-msg box" }).prependTo('#messages');
+        }
+        // メッセージ表示
+        $("<p>", {
+            text: msg.text,
+            class: "content"
+        }).prependTo($(".box")[0]);
+
+        // タイトル表示
+        $("<span>", {
+            text: "　" + msg.user + " ",
+            class: "title"
+        }).prependTo($(".box")[0]);
+
+        // 時刻表示
+        $("<span>", {
+            text: msg.date,
+            class: "date"
+        }).appendTo($(".title")[0]);
+        msg.date
+
+        // アイコン表示
+        $("<span>", { class: "icon" }).prependTo($(".title")[0]);
 
         //連続クリックに対応
         audio.currentTime = 0;

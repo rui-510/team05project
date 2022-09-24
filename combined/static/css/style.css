@@ -8,6 +8,7 @@ body {
     background: url("../img/body.png");
     background-repeat: no-repeat;
     background-position: center top;
+    background-size: cover;
 }
 
 form {

@@ -13,5 +13,17 @@
         <br>
         <a class="btn btn-primary button" href="/join" role="button">ルームに参加する</a>
     </div>
+    <br>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="error">
+            <ul class=flashes>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    {% endwith %}
 
 {% endblock %}
