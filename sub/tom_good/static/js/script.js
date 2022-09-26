@@ -11,7 +11,6 @@ $(function() {
         let user = msg.name;
         // 人数の更新
         $('#user_count').html(msg.user_count);
-        $('#good_count').html(msg.good_count);
 
         // 入室通知
         if (msg.alert) {
@@ -30,7 +29,6 @@ $(function() {
 
         // 最初の人を表示
         $('#members').append('<li class="accordion-header list-group-item list-group-item-info" id="flush-headingOne"></li>')
-        // $('#members').append('<button class="accordion-button collapsed list-group-item list-group-item-info" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne"><button>')
         $("<button>", {
             type: "button",
             text: msg.members[0],
@@ -107,6 +105,14 @@ $(function() {
             audio.muted = true;
         }
     })
+
+/*******************   変更点   ************************/
+
+    socket.on('good_countup', function (msg) {
+        $('#good_count').html(msg.good_count);
+    });
+
+/*******************************************************/
 
     // いいね！機能:現在没仕様だが、使えそう
     // $("#good").on("click", () => {

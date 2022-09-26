@@ -357,8 +357,10 @@ def chat_message(json):
         # データから値を読み取る
         good_count = db.execute("SELECT * FROM chat_room WHERE id = ?", room_id)[0]["good_count"]
         # 値をWeb上に反映
-        # メモ：「emit('count_update', {'user_count': user_count, 'good_count': good_count, 'members': members, 'alert': False}, room=room_id)」だと動かなかった
-        emit('count_update', {'good_count': good_count}, room=room_id)
+
+        """""""""  変更点  """"""""""
+        emit('good_countup', {'good_count': good_count}, room=room_id)
+
 
     else:
         # 日本時間での現在時刻を取得
