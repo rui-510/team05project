@@ -147,8 +147,8 @@ $(function() {
         }
         //　setTimeout更新
         let timeID = setTimeout(() => {
-
-        }, 1000)
+            $('#good_count').html();
+        }, 5000)
     });
 
     // ４卓の場合の投票
