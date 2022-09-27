@@ -49,10 +49,10 @@ $(function() {
         }).prependTo('#messages');
 
         if(msg.text == '次は自分が話したいです'){
-        document.getElementById('btn_audio1').currentTime = 0; //連続クリックに対応
-        document.getElementById('btn_audio1').play(); //クリックしたら音を再生)
+            document.getElementById('btn_audio1').currentTime = 0; //連続クリックに対応
+            document.getElementById('btn_audio1').play(); //クリックしたら音を再生)
         }
-        
+
 
     });
 

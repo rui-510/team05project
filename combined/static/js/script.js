@@ -2,10 +2,16 @@ $(function() {
 
     const socket = io();
 
+/********* グローバル変数 ******************/
     let id = $("#id").html();
     $('#roomid').val(id);
 
+    // 投票数のリセット時間
+    let clearTime = 15;
+
     const audio = $('#btn_audio')[0];
+
+/****************************************/
 
     // 接続者数の更新
     socket.on('count_update', function (msg) {
@@ -132,18 +138,14 @@ $(function() {
         }
     })
 
-    //接続した人に現在の画面を共有
-    // socket.on('restore_message', function (msg) {
-    //     for (let i = 0; i < msg.chat.length; i++) {
-    //         $("<li>", {
-    //             text: msg.chat[i]
-    //         }).appendTo('#messages');
-    //     }
+    // いいね数の変更
+    socket.on('good_countup', function (msg) {
+        $('#good_count').html(msg.good_count);
+        // setTimeoutを解除
+        //　リセット時間の設定
+        //　setTimeout更新
+    });
 
-    //     // 名前の取得
-    //     let user = msg.name;
-    //     //メッセージの入力欄の横に名前を表示
-    //     $("#basic-addon3").html(user);
-    // });
+    // ４卓の場合の投票
 
 });

@@ -351,20 +351,31 @@ def chat_message(json):
     msg_type = json["type"]
     room_id = int(id)
 
-    # 日本時間での現在時刻を取得
-    date = datetime.datetime.now(pytz.timezone('Asia/Tokyo'))
+    # 「いいね！」ボタンが押したときだけ、分岐
+    if text  == "いいね！":
 
-    # 現在時刻のデータ形式を「datetime型」から「文字型」に変更
-    date_str = "-" + date.strftime('%H:%M') + "-"
+        # 「いいね！」数データの更新
+        db.execute("UPDATE chat_room SET good_count = (good_count + 1) WHERE id = ?", room_id)
+        # データから値を読み取る
+        good_count = db.execute("SELECT * FROM chat_room WHERE id = ?", room_id)[0]["good_count"]
+        # いいね数をWeb上に反映
+        emit('good_countup', {'good_count': good_count}, room=room_id)
 
-    # chat.append(user_text)
+    else:
+            # 日本時間での現在時刻を取得
+            date = datetime.datetime.now(pytz.timezone('Asia/Tokyo'))
 
-    # メッセージの種類を判別
-    if msg_type == "button":
-        emit('chat_message', {'text': text , 'user': user , 'date': date_str , 'type': True}, room=room_id)
+            # 現在時刻のデータ形式を「datetime型」から「文字型」に変更
+            date_str = "-" + date.strftime('%H:%M') + "-"
 
-    elif msg_type == "message":
-        emit('chat_message', {'text': text , 'user': user , 'date': date_str , 'type': False}, room=room_id)
+            # chat.append(user_text)
+
+            # メッセージの種類を判別
+            if msg_type == "button":
+                emit('chat_message', {'text': text , 'user': user , 'date': date_str , 'type': True}, room=room_id)
+
+            elif msg_type == "message":
+                emit('chat_message', {'text': text , 'user': user , 'date': date_str , 'type': False}, room=room_id)
 
 if __name__ == '__main__':
     # 本番環境ではeventletやgeventを使うらしいが簡単のためデフォルトの開発用サーバーを使う
