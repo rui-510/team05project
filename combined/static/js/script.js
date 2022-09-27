@@ -142,8 +142,8 @@ $(function() {
     socket.on('good_countup', function (msg) {
         $('#good_count').html(msg.good_count);
         // setTimeoutを解除
-        if (msg.good_count == 1) {
-            
+        if (msg.good_count != 1) {
+
         }
         //　リセット時間の設定
         //　setTimeout更新
