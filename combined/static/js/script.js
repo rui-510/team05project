@@ -147,7 +147,7 @@ $(function() {
         }
         //　setTimeout更新
         let timerID = setTimeout(() => {
-            $('#good_count').html();
+            $('#good_count').html("0");
         }, 5000)
     });
 
