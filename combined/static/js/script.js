@@ -146,7 +146,7 @@ $(function() {
             clearTimeout(timerID);
         }
         //　setTimeout更新
-        let timeID = setTimeout(() => {
+        let timerID = setTimeout(() => {
             $('#good_count').html();
         }, 5000)
     });
