@@ -139,7 +139,17 @@ $(function() {
     $(".good").on("click", function () {
         id = $("#id").html();
         socket.emit("chat_message", { id: id });
-        
+
+        // リセット時間の初期化
+        $('#good_count').html(msg.good_count);
+        if (msg.good_count != 1) {
+            clearTimeout(timerID)
+        }
+
+        // リセット時間の設定
+        let timerID = setTimeout(() => {
+            $('#good_count').html(0);
+        }, 5000);
     })
 
     // いいね数の変更
