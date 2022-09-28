@@ -1,12 +1,12 @@
 from flask import Flask, redirect, flash, render_template, request, session
 from flask_session import Session
 from flask_socketio import SocketIO, send, emit, join_room, leave_room
-from Tkinter import
 from cs50 import SQL
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from helpers import login_required, roomin_checked
 
+import tkinter as tk
 import datetime, pytz
 import random
 import time
