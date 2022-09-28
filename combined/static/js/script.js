@@ -138,7 +138,7 @@ $(function() {
     // いいねボタンが押されると呼び出される
     $(".good").on("click", function () {
         id = $("#id").html();
-        socket.emit("chat_message", { id: id });
+        socket.emit("chat_message", { id: id, is_reset: "False" });
 
         // リセット時間の初期化
         $('#good_count').html(msg.good_count);
