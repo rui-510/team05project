@@ -6,7 +6,6 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 from helpers import login_required, roomin_checked
 
-import tkinter as tk
 import datetime, pytz
 import random
 import time
@@ -381,9 +380,6 @@ def good_count(json):
     # いいね数をWeb上に反映
     emit('good_countup', {'good_count': good_count}, room=room_id)
 
-    tk.Tk().after(5000, reset_good_count)
-    tk.Tk().mainloop()
-
 # いいね数のリセット
 @login_required
 def reset_good_count():
@@ -393,6 +389,8 @@ def reset_good_count():
     good_count = db.execute("SELECT * FROM chat_room WHERE id = ?", room_id)[0]["good_count"]
     # いいね数をWeb上に反映
     emit('good_countup', {'good_count': good_count}, room=room_id)
+
+
 
 if __name__ == '__main__':
     # 本番環境ではeventletやgeventを使うらしいが簡単のためデフォルトの開発用サーバーを使う
