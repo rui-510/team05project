@@ -137,7 +137,7 @@ $(function() {
 
     let timerID;
     // いいねボタンが押されると呼び出される
-    $(".good").on("click", function () {
+    $(".good").on("click", function (msg) {
         id = $("#id").html();
         socket.emit("good_count", { id: id, is_reset: false });
 
