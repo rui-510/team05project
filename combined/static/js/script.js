@@ -135,10 +135,11 @@ $(function() {
         }
     })
 
+    let timerID;
     // いいねボタンが押されると呼び出される
     $(".good").on("click", function () {
         id = $("#id").html();
-        socket.emit("chat_message", { id: id, is_reset: "False" });
+        socket.emit("good_count", { id: id, is_reset: false });
 
         // リセット時間の初期化
         $('#good_count').html(msg.good_count);
@@ -147,8 +148,8 @@ $(function() {
         }
 
         // リセット時間の設定
-        let timerID = setTimeout(() => {
-            socket.emit("chat_message", { id: id });
+        timerID = setTimeout(() => {
+            socket.emit("good_count", { id: id, is_reset: true });
         }, 5000);
     })
 

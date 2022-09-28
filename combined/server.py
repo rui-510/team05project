@@ -367,18 +367,25 @@ def chat_message(json):
         emit('chat_message', {'text': text , 'user': user , 'date': date_str , 'type': False}, room=room_id)
 
 # 「いいね！」ボタンが押されると実行
-@socketio.on('chat_message')
+@socketio.on('good_count')
 def good_count(json):
     global room_id
 
     room_id = int(json["id"])
 
-    # 「いいね！」数データの更新
-    db.execute("UPDATE chat_room SET good_count = (good_count + 1) WHERE id = ?", room_id)
-    # データから値を読み取る
-    good_count = db.execute("SELECT * FROM chat_room WHERE id = ?", room_id)[0]["good_count"]
-    # いいね数をWeb上に反映
-    emit('good_countup', {'good_count': good_count}, room=room_id)
+    if (json["is_reset"]):
+        # 「いいね！」数データを0にする
+        db.execute("UPDATE chat_room SET good_count = 0 WHERE id = ?", room_id)
+        # いいね数をWeb上に反映
+        emit('good_countup', {'good_count': 0}, room=room_id)
+
+    else:
+        # 「いいね！」数データの更新
+        db.execute("UPDATE chat_room SET good_count = (good_count + 1) WHERE id = ?", room_id)
+        # データから値を読み取る
+        good_count = db.execute("SELECT * FROM chat_room WHERE id = ?", room_id)[0]["good_count"]
+        # いいね数をWeb上に反映
+        emit('good_countup', {'good_count': good_count}, room=room_id)
 
 
 if __name__ == '__main__':
