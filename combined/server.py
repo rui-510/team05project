@@ -369,7 +369,11 @@ def chat_message(json):
 
 # 「いいね！」ボタンが押されると実行
 @socketio.on('chat_message')
-def good_count():
+def good_count(json):
+    global room_id
+
+    room_id = int(json["id"])
+
     # 「いいね！」数データの更新
     db.execute("UPDATE chat_room SET good_count = (good_count + 1) WHERE id = ?", room_id)
     # データから値を読み取る

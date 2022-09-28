@@ -137,11 +137,13 @@ $(function() {
 
     // いいねボタンが押されると呼び出される
     $(".good").on("click", function () {
-        socket.emit("chat_message");
+        id = $("#id").html();
+        socket.emit("chat_message", { id: id });
     })
 
     // いいね数の変更
     socket.on('good_countup', function (msg) {
+
         $('#good_count').html(msg.good_count);
     });
 
