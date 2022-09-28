@@ -135,16 +135,14 @@ $(function() {
         }
     })
 
+    // ボタンが押されると呼び出される
+    $(".good").on("click", function (e) {
+        socket.emit("chat_message", { text: text , user: user_name , id: id , type: "button"});
+    })
+
     // いいね数の変更
     socket.on('good_countup', function (msg) {
         $('#good_count').html(msg.good_count);
-        if (msg.good_count != 1) {
-            clearTimeout(timerID)
-        }
-
-        let timerID = setTimeout(() => {
-            $('#good_count').html(0);
-        }, 5000);
     });
 
     // ４卓の場合の投票
