@@ -381,11 +381,12 @@ def good_count(json):
     # いいね数をWeb上に反映
     emit('good_countup', {'good_count': good_count}, room=room_id)
 
-    tk.Tk().after(5000, change_good_count)
+    tk.Tk().after(5000, reset_good_count)
+    tk.Tk().mainloop()
 
-# いいね数の変更
+# いいね数のリセット
 @login_required
-def change_good_count():
+def reset_good_count():
     # 「いいね！」数データの更新
     db.execute("UPDATE chat_room SET good_count = (good_count + 1) WHERE id = ?", room_id)
     # データから値を読み取る
