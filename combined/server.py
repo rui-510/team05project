@@ -381,7 +381,7 @@ def good_count(json):
     # いいね数をWeb上に反映
     emit('good_countup', {'good_count': good_count}, room=room_id)
 
-    tk.TK().after
+    tk.TK().after(5000, )
 
 if __name__ == '__main__':
     # 本番環境ではeventletやgeventを使うらしいが簡単のためデフォルトの開発用サーバーを使う
