@@ -6,9 +6,6 @@ $(function() {
     let id = $("#id").html();
     $('#roomid').val(id);
 
-    // 投票数のリセット時間
-    let clearTime = 15;
-
     const audio = $('#btn_audio')[0];
 
 /****************************************/
@@ -141,14 +138,6 @@ $(function() {
     // いいね数の変更
     socket.on('good_countup', function (msg) {
         $('#good_count').html(msg.good_count);
-        // setTimeoutを解除
-        if (msg.good_count != 1) {
-            clearTimeout(timerID);
-        }
-        //　setTimeout更新
-        let timerID = setTimeout(() => {
-            $('#good_count').html("0");
-        }, 5000)
     });
 
     // ４卓の場合の投票
