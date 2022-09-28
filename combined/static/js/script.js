@@ -148,13 +148,12 @@ $(function() {
 
         // リセット時間の設定
         let timerID = setTimeout(() => {
-            $('#good_count').html(0);
+            socket.emit("chat_message", { id: id });
         }, 5000);
     })
 
     // いいね数の変更
     socket.on('good_countup', function (msg) {
-
         $('#good_count').html(msg.good_count);
     });
 
