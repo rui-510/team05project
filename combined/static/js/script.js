@@ -139,6 +139,7 @@ $(function() {
     $(".good").on("click", function () {
         id = $("#id").html();
         socket.emit("chat_message", { id: id });
+        
     })
 
     // いいね数の変更

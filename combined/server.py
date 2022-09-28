@@ -380,18 +380,6 @@ def good_count(json):
     # いいね数をWeb上に反映
     emit('good_countup', {'good_count': good_count}, room=room_id)
 
-# いいね数のリセット
-@login_required
-def reset_good_count():
-    # 「いいね！」数データの更新
-    db.execute("UPDATE chat_room SET good_count = (good_count + 1) WHERE id = ?", room_id)
-    # データから値を読み取る
-    good_count = db.execute("SELECT * FROM chat_room WHERE id = ?", room_id)[0]["good_count"]
-    # いいね数をWeb上に反映
-    emit('good_countup', {'good_count': good_count}, room=room_id)
-
-
 
 if __name__ == '__main__':
-    # 本番環境ではeventletやgeventを使うらしいが簡単のためデフォルトの開発用サーバーを使う
     socketio.run(app, debug=True)
