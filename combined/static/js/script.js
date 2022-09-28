@@ -135,9 +135,9 @@ $(function() {
         }
     })
 
-    // ボタンが押されると呼び出される
-    $(".good").on("click", function (e) {
-        socket.emit("chat_message", { text: text , user: user_name , id: id , type: "button"});
+    // いいねボタンが押されると呼び出される
+    $(".good").on("click", function () {
+        socket.emit("chat_message");
     })
 
     // いいね数の変更
