@@ -118,6 +118,10 @@ h3 {
     z-index: 2;
 }
 
+#good_count {
+    font-weight: bold;
+}
+
 /* メッセージ入力 */
 #form {
     display: flex;
