@@ -376,8 +376,6 @@ def good_count(json):
     if (json["is_reset"]):
         # 「いいね！」数データを0にする
         db.execute("UPDATE chat_room SET good_count = 0 WHERE id = ?", room_id)
-        # いいね数をWeb上に反映
-        emit('good_countup', {'good_count': 0}, room=room_id)
 
     else:
         # 「いいね！」数データの更新

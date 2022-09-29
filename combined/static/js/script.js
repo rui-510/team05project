@@ -164,7 +164,7 @@ $(function() {
 
         // リセット時間の設定
         timerID = setTimeout(() => {
-            socket.emit("good_count", { id: id, is_reset: true });
+            socket.emit("good_reset", { id: id, is_reset: true });
             $("#good").hide();
         }, resetTime);
     });
