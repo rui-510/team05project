@@ -3,12 +3,17 @@ $(function() {
     const socket = io();
 
 /********* グローバル変数 ******************/
-    let id = $("#id").html();
-    $('#roomid').val(id);
+    let id = $("#id").html();           // ルームid
 
-    const audio = $('#btn_audio')[0];
+    const audio = $('#btn_audio')[0];   // オーディオ設定
+
+    let timerID;
+
+    let resetTime = 5000;               // いいね数のリセット時間
 
 /****************************************/
+
+    $('#roomid').val(id);
 
     // 接続者数の更新
     socket.on('count_update', function (msg) {
@@ -135,7 +140,6 @@ $(function() {
         }
     })
 
-    let timerID;
     // いいねボタンが押されると呼び出される
     $(".good").on("click", function (msg) {
         id = $("#id").html();
@@ -150,7 +154,7 @@ $(function() {
         // リセット時間の設定
         timerID = setTimeout(() => {
             socket.emit("good_count", { id: id, is_reset: true });
-        }, 5000);
+        }, resetTime);
     })
 
     // いいね数の変更
