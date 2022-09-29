@@ -138,6 +138,19 @@ h3 {
     backdrop-filter: blur(10px);
 }
 
+/* いいね数表示 */
+#good {
+    background: #ec4646;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    color: #fff;
+    font-size: 52px;
+    text-align: center;
+    line-height: 80px;
+}
+
+
 /* ボタン表示 */
 #button {
     background-color: #b5afaf;
