@@ -100,6 +100,18 @@ h3 {
     font-size: 1.7em;
 }
 
+/* いいね数表示 */
+#good {
+    background: #ec4646;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    color: #fff;
+    font-size: 10px;
+    text-align: center;
+    line-height: 90px;
+}
+
 /* メッセージ入力 */
 #form {
     display: flex;
@@ -138,19 +150,6 @@ h3 {
     backdrop-filter: blur(10px);
 }
 
-/* いいね数表示 */
-#good {
-    background: #ec4646;
-    border-radius: 50%;
-    width: 80px;
-    height: 80px;
-    color: #fff;
-    font-size: 52px;
-    text-align: center;
-    line-height: 80px;
-}
-
-
 /* ボタン表示 */
 #button {
     background-color: #b5afaf;
@@ -173,16 +172,15 @@ h3 {
     display: inline-block;
     padding: 0.5em 1em;
     text-decoration: none;
-    background: #668ad8;/*ボタン色*/
+    background: #668ad8;
     color: #FFF;
     border-bottom: solid 4px #627295;
     border-radius: 3px;
 }
 .mute_btn:active {
-    /*ボタンを押したとき*/
     -webkit-transform: translateY(4px);
-    transform: translateY(4px);/*下に動く*/
-    border-bottom: none;/*線を消す*/
+    transform: translateY(4px);
+    border-bottom: none;
 }
 
 /* 送信ボタン */
