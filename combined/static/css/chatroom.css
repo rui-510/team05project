@@ -167,20 +167,17 @@ h3 {
     margin: 0 5px;
 }
 
+.btn:active {
+    -webkit-transform: translateY(4px);
+    transform: translateY(4px);
+}
+
 /* ミュートボタン */
 .mute_btn {
     display: inline-block;
-    padding: 0.5em 1em;
-    text-decoration: none;
     background: #668ad8;
     color: #FFF;
-    border-bottom: solid 4px #627295;
-    border-radius: 3px;
-}
-.mute_btn:active {
-    -webkit-transform: translateY(4px);
-    transform: translateY(4px);
-    border-bottom: none;
+    border-radius: 5px;
 }
 
 /* 送信ボタン */
