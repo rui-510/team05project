@@ -181,13 +181,6 @@ h3 {
     content: "mute: ON";
 }
 
-.mute_btn:active {
-    background: #668ad8;
-    color: #FFF;
-    border-radius: 5px;
-    content: "mute: ON";
-}
-
 /* 送信ボタン */
 #form>button {
     background: #4e8357;
