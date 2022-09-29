@@ -101,7 +101,7 @@ h3 {
 }
 
 /* いいね数表示 */
-.goodnum {
+#good {
     background: #ec4646;
     border-radius: 50%;
     width: 100px;
