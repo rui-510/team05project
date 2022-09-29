@@ -173,6 +173,10 @@ h3 {
     height: 3rem;
 }
 
+.good {
+    background-color: #b1fff6;
+}
+
 .btn {
     padding: 0.2rem 1rem;
     font-weight: bold;
