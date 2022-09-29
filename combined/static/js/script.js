@@ -140,7 +140,7 @@ $(function() {
         } else {
             audio.muted = true;
             $('#mute').html("mute: ON");
-            $('.mute_btn').css("background", "#000");
+            $('.mute_btn').css("background", "#433947");
         }
     })
 

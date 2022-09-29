@@ -181,6 +181,10 @@ h3 {
     content: "mute: ON";
 }
 
+.mute_btn:hover {
+    color: #fff;
+}
+
 /* 送信ボタン */
 #form>button {
     background: #4e8357;
