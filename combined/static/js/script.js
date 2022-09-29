@@ -167,6 +167,12 @@ $(function() {
     // いいね数の変更
     socket.on('good_countup', function (msg) {
         $('#good_count').html(msg.good_count);
+
+        // リセット時間の設定
+        timerID = setTimeout(() => {
+            socket.emit("good_count", { id: id, is_reset: true });
+            $("#good").hide();
+        }, resetTime);
     });
 
     // ４卓の場合の投票
