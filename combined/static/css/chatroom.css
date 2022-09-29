@@ -389,5 +389,7 @@ h3 {
 }
 
 @media screen and (max-width: 638px) {
-
+    #button {
+        height: 8rem;
+    }
 }
