@@ -114,6 +114,7 @@ h3 {
     text-align: center;
     line-height: 38px;
     position: absolute;
+    display: none;
     right: 15px;
     top: 110px;
     z-index: 2;

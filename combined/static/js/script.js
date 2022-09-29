@@ -149,6 +149,8 @@ $(function() {
         id = $("#id").html();
         socket.emit("good_count", { id: id, is_reset: false });
 
+        $("#good").show();
+
         // リセット時間の初期化
         $('#good_count').html(msg.good_count);
         if (msg.good_count != 1) {
@@ -158,6 +160,7 @@ $(function() {
         // リセット時間の設定
         timerID = setTimeout(() => {
             socket.emit("good_count", { id: id, is_reset: true });
+            $("#good").hide();
         }, resetTime);
     })
 
