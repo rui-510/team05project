@@ -148,6 +148,11 @@ $(function() {
     $(".good").on("click", function (msg) {
         id = $("#id").html();
         socket.emit("good_count", { id: id, is_reset: false });
+    })
+
+    // いいね数の変更
+    socket.on('good_countup', function (msg) {
+        $('#good_count').html(msg.good_count);
 
         $("#good").show();
 
@@ -162,19 +167,5 @@ $(function() {
             socket.emit("good_count", { id: id, is_reset: true });
             $("#good").hide();
         }, resetTime);
-    })
-
-    // いいね数の変更
-    socket.on('good_countup', function (msg) {
-        $('#good_count').html(msg.good_count);
-
-        // リセット時間の設定
-        timerID = setTimeout(() => {
-            socket.emit("good_count", { id: id, is_reset: true });
-            $("#good").hide();
-        }, resetTime);
     });
-
-    // ４卓の場合の投票
-
 });
