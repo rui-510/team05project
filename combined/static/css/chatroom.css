@@ -110,6 +110,10 @@ h3 {
     font-size: 10px;
     text-align: center;
     line-height: 90px;
+    position: absolute;
+    right: 15px;
+    top: 110px;
+    z-index: 2;
 }
 
 /* メッセージ入力 */
@@ -210,7 +214,7 @@ h3 {
 
 .box {
     position: relative;
-    width: 85%;
+    width: 80%;
     border-radius: 10px;
     box-shadow: 0 0 8px #333, 0 0 2px #555 inset;
     margin: 10px auto 18px;
