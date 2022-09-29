@@ -135,8 +135,10 @@ $(function() {
     $("#mute").on("click", () => {
         if (audio.muted) {
             audio.muted = false;
+            $('#good_count').html(msg.good_count);
         } else {
             audio.muted = true;
+            $('#good_count').html(msg.good_count);
         }
     })
 
